@@ -2,7 +2,7 @@
   "name": "mob-api",
   "version": "4.0.0",
   "description": "Nova versão da API do Mob Your Life.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,5 +12,8 @@
   },
   "author": "Filipe Oliveira <contato@fmoliveira.com.br>",
   "license": "Apache-2.0",
-  "homepage": "https://bitbucket.org/mobyourlife/api#readme"
+  "homepage": "https://bitbucket.org/mobyourlife/api#readme",
+  "dependencies": {
+    "hapi": "^14.2.0"
+  }
 }
