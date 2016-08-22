@@ -2,10 +2,11 @@
 
 const Boom = require('boom');
 const User = require('../models/user');
+const route = require('resolve-route')(__dirname, '..');
 
 module.exports = {
   method: 'GET',
-  path: '/users',
+  path: `/${route}`,
   config: {
     handler: (req, res) => {
       User

@@ -5,10 +5,11 @@ const User = require('../models/user');
 const authenticateUserSchema = require('../schemas/authenticateUser');
 const verifyCredentials = require('../utils/userFunctions').verifyCredentials;
 const createToken = require('../utils/token');
+const route = require('resolve-route')(__dirname, '..');
 
 module.exports = {
   method: 'POST',
-  path: '/users/authenticate',
+  path: `/${route}/authenticate`,
   config: {
     auth: false,
     pre: [

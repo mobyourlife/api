@@ -4,10 +4,11 @@ const Boom = require('boom');
 const User = require('../models/user');
 const updateUserSchema = require('../schemas/updateUser');
 const verifyUniqueUser = require('../utils/userFunctions').verifyUniqueUser;
+const route = require('resolve-route')(__dirname, '..');
 
 module.exports = {
   method: 'PATCH',
-  path: '/users/{id}',
+  path: `/${route}/{id}`,
   config: {
     pre: [
       { method: verifyUniqueUser, assign: 'user' }
