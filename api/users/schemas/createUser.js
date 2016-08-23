@@ -4,7 +4,7 @@ const Joi = require('joi');
 
 const createUserSchema = Joi.object({
   fb_uid: Joi.string().required(),
-  email: Joi.string().email()
+  access_token: Joi.string().required()
 });
 
 module.exports = createUserSchema;
