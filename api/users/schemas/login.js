@@ -2,9 +2,9 @@
 
 const Joi = require('joi');
 
-const authenticateUserSchema = Joi.object({
+const loginSchema = Joi.object({
   fb_uid: Joi.string().required(),
   access_token: Joi.string().required()
 });
 
-module.exports = authenticateUserSchema;
+module.exports = loginSchema;

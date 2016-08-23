@@ -3,7 +3,7 @@
 const Boom = require('boom');
 const User = require('../models/user');
 const updateUserSchema = require('../schemas/updateUser');
-const verifyUniqueUser = require('../utils/userFunctions').verifyUniqueUser;
+const verifyCredentials = require('../utils/userFunctions').verifyCredentials;
 const route = require('resolve-route')(__dirname, '..');
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
   path: `/${route}/{id}`,
   config: {
     pre: [
-      { method: verifyUniqueUser, assign: 'user' }
+      { method: verifyCredentials, assign: 'user' }
     ],
     handler: (req, res) => {
       const id = req.params.id;
