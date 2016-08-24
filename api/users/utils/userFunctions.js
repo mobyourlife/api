@@ -1,6 +1,5 @@
 'use strict';
 
-const Boom = require('boom');
 const User = require('../models/user');
 
 function verifyCredentials(req, res) {

@@ -1,7 +1,6 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Boom = require('boom');
 const mongoose = require('mongoose');
 const glob = require('glob');
 const path = require('path');
@@ -21,6 +20,10 @@ server.connection({
 
 // Setup JWT auth
 server.register(require('hapi-auth-jwt'), (err) => {
+  if (err) {
+    throw err;
+  }
+
   // Setup auth strategy
   server.auth.strategy('jwt', 'jwt', 'required', {
     key: CONFIG.JWT_SECRET,
@@ -34,7 +37,7 @@ server.register(require('hapi-auth-jwt'), (err) => {
     const route = require(path.join(__dirname, file));
     server.route(route);
   });
-})
+});
 
 // Start server
 server.start((err) => {
