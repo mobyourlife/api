@@ -13,7 +13,10 @@ const CONFIG = require('./config');
 const server = new Hapi.Server();
 server.connection({
   host: '0.0.0.0',
-  port: CONFIG.SERVER_PORT
+  port: CONFIG.SERVER_PORT,
+  routes: {
+    cors: true
+  }
 });
 
 // Setup JWT auth
