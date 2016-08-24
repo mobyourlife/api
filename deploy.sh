@@ -11,9 +11,12 @@ docker ps -a | grep $IMG_NAME | awk '{print $1}' | xargs docker rm -f
 docker run  \
   --name $IMG_VERSION \
   --restart=always \
+  --link mob-db-mongo:db \
   -v `pwd`:/usr/src/app \
   -w /usr/src/app \
-  -e PORT='8000' \
+  -e JWT_SECRET=$JWT_SECRET \
+  -e SERVER_PORT='8000' \
+  -e MONGO_URL='mongodb://db:27017/mobyourlife' \
   -p 4002:8000 \
   -d \
   node@argon \
