@@ -1,14 +1,13 @@
 'use strict';
 
-const Boom = require('boom');
-const User = require('../models/user');
-const updateUserSchema = require('../schemas/updateUser');
-const verifyCredentials = require('../utils/userFunctions').verifyCredentials;
-const route = require('resolve-route')(__dirname, '..');
+import Boom from 'boom';
+import { User } from '../../models';
+import { UserUpdateDto } from '../../dtos';
+import { verifyCredentials } from '../../utils';
 
-module.exports = {
+export const UsersUpdate = {
   method: 'PATCH',
-  path: `/${route}/{id}`,
+  path: `/{id}`,
   config: {
     pre: [
       { method: verifyCredentials, assign: 'user' }
@@ -27,8 +26,8 @@ module.exports = {
         });
     },
     validate: {
-      payload: updateUserSchema.payloadSchema,
-      params: updateUserSchema.paramsSchema
+      payload: UserUpdateDto.Payload(),
+      params: UserUpdateDto.Parameters()
     },
     auth: {
       strategy: 'jwt',

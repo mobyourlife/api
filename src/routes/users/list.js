@@ -1,12 +1,10 @@
 'use strict';
 
-const Boom = require('boom');
-const User = require('../models/user');
-const route = require('resolve-route')(__dirname, '..');
+import Boom from 'boom';
+import { User } from '../../models';
 
-module.exports = {
+export const UsersList = {
   method: 'GET',
-  path: `/${route}`,
   config: {
     handler: (req, res) => {
       User

@@ -1,16 +1,12 @@
 'use strict';
 
-const Boom = require('boom');
-const User = require('../models/user');
-const loginSchema = require('../schemas/login');
-const verifyCredentials = require('../utils/userFunctions').verifyCredentials;
-const createToken = require('../utils/token');
-const route = require('resolve-route')(__dirname, '..');
-const facebook = require('../utils/facebook');
+import Boom from 'boom';
+import { User } from '../../models';
+import { LoginDto } from '../../dtos';
+import { verifyCredentials, createToken, validateUser } from '../../utils';
 
-module.exports = {
+export const UsersLogin = {
   method: 'POST',
-  path: `/${route}`,
   config: {
     auth: false,
     pre: [
@@ -20,7 +16,7 @@ module.exports = {
       if (req.pre.user) {
         res({ id_token: createToken(req.pre.user) }).code(200);
       } else {
-        facebook.validateUser(req.payload.fb_uid, req.payload.access_token)
+        validateUser(req.payload.fb_uid, req.payload.access_token)
           .then(data => {
             let user = new User();
             user.fb_uid = req.payload.fb_uid;
@@ -39,7 +35,7 @@ module.exports = {
       }
     },
     validate: {
-      payload: loginSchema
+      payload: LoginDto.Payload()
     }
   }
 };

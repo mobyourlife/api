@@ -1,6 +1,7 @@
 'use strict';
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
 
 const UserModel = new Schema({
@@ -10,4 +11,4 @@ const UserModel = new Schema({
   admin: { type: Boolean, required: true }
 });
 
-module.exports = mongoose.model('User', UserModel);
+export const User = mongoose.model('User', UserModel);

@@ -1,9 +1,9 @@
 'use strict';
 
-const jwt = require('jsonwebtoken');
-const CONFIG = require('../../../config');
+import jwt from 'jsonwebtoken';
+import { CONFIG } from '../config';
 
-function createToken(user) {
+export function createToken(user) {
   let scopes;
 
   if (user.admin) {
@@ -19,5 +19,3 @@ function createToken(user) {
     expiresIn: '1h'
   });
 }
-
-module.exports = createToken;

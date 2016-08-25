@@ -1,11 +1,11 @@
 'use strict';
 
-const request = require('https');
-const qs = require('querystring');
+import request from 'https';
+import qs from 'querystring';
 
 const API_URL = 'https://graph.facebook.com/v2.7';
 
-function validateUser(fb_uid, access_token) {
+export function validateUser(fb_uid, access_token) {
   return new Promise((resolve, reject) => {
     let params = qs.stringify({
       fields: 'id,name,email',
@@ -34,7 +34,3 @@ function validateUser(fb_uid, access_token) {
       });
   });
 }
-
-module.exports = {
-  validateUser: validateUser
-};

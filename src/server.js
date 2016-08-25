@@ -1,12 +1,15 @@
-'use strict';
-
-const Hapi = require('hapi');
-const mongoose = require('mongoose');
-const glob = require('glob');
-const path = require('path');
+import Hapi from 'hapi';
+import mongoose from 'mongoose';
+import glob from 'glob';
+import path from 'path';
 
 // Settings
-const CONFIG = require('./config');
+import { CONFIG } from './config';
+
+// Routes
+import {
+  UsersRoutes
+} from './routes';
 
 // Setup server
 const server = new Hapi.Server();
@@ -31,12 +34,7 @@ server.register(require('hapi-auth-jwt'), (err) => {
   });
 
   // Setup all routes
-  glob.sync('api/**/routes/*.js', {
-    root: __dirname
-  }).forEach(file => {
-    const route = require(path.join(__dirname, file));
-    server.route(route);
-  });
+  registerRoutes(server, '/users', UsersRoutes);
 });
 
 // Start server
@@ -44,7 +42,7 @@ server.start((err) => {
   if (err) {
     throw err;
   }
-  console.log(`Server running at ${server.info.uri}`);
+  console.log(`Server running at ${server.info.uri}...`);
   mongoose.connect(CONFIG.MONGO_URL, {}, (err) => {
     if (err) {
       throw err;
@@ -52,3 +50,20 @@ server.start((err) => {
     console.log('Connected successfully to the database!');
   });
 });
+
+// Register routes into the server
+function registerRoutes(server, basePath, routes) {
+  if (!routes || !Array.isArray(routes)) {
+    return;
+  }
+
+  routes
+    .map(i => {
+      i.path = basePath + (i.path || '');
+      return i;
+    })
+    .forEach(i => {
+      console.log(`Registering route ${i.method} ${i.path}...`);
+      server.route(i);
+    });
+}
