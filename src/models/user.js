@@ -1,8 +1,8 @@
 'use strict';
 
-import mongoose from 'mongoose';
+import Mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
+const Schema = Mongoose.Schema;
 
 const UserModel = new Schema({
   fb_uid: { type: String, required: true, index: { unique: true }},
@@ -11,4 +11,4 @@ const UserModel = new Schema({
   admin: { type: Boolean, required: true }
 });
 
-export const User = mongoose.model('User', UserModel);
+export const User = Mongoose.model('User', UserModel);
