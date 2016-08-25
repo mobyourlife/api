@@ -1,6 +1,5 @@
 import Hapi from 'hapi';
 import Mongoose from 'mongoose';
-import Bluebird from 'bluebird';
 import glob from 'glob';
 import path from 'path';
 
@@ -46,7 +45,7 @@ server.start((err) => {
 
   console.log(`Server running at ${server.info.uri}...`);
 
-  Mongoose.Promise = Bluebird;
+  Mongoose.Promise = global.Promise;
   Mongoose.connect(CONFIG.MONGO_URL, {}, (err) => {
     if (err) {
       throw err;
