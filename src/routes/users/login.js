@@ -20,14 +20,31 @@ export const UsersLogin = {
           .then(data => {
             let user = new User();
             user.fb_uid = req.payload.fb_uid;
-            user.email = data.email;
-            user.name = data.name;
+            user.email = data.profile.email;
+            user.name = data.profile.name;
             user.admin = false;
+
+            if (data.profile.picture && !data.profile.picture.data.is_silhouette) {
+              user.picture = data.profile.picture.data.url;
+            }
+
+            user.accounts = data.accounts.data.map(i => {
+              return {
+                account_id: i.id,
+                name: i.name,
+                category: i.category,
+                category_list: i.category_list,
+                access_token: i.access_token,
+                perms: i.perms
+              };
+            });
+
             user.save((err, user) => {
               if (err) {
-                throw Boom.badRequest(err);
+                res({ message: 'User already registered!' }).code(400)
+              } else {
+                res({ id_token: createToken(user) }).code(201);
               }
-              res({ id_token: createToken(user) }).code(201);
             });
           }, (err) => {
             res(err).code(400);

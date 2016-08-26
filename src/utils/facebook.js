@@ -1,36 +1,39 @@
 'use strict';
 
-import request from 'https';
-import qs from 'querystring';
+import request from 'superagent';
 
-const API_URL = 'https://graph.facebook.com/v2.7';
+const FB_TOKEN = process.env.FB_TOKEN;
+const API_URL = 'https://graph.facebook.com/v2.7/?access_token=' + FB_TOKEN;
+const PROFILE = [
+  {
+    "method": "GET",
+    "relative_url": "me?fields=id,name,email,picture"
+  },
+  {
+    "method": "GET",
+    "relative_url": "me/accounts"
+  }
+];
+const BATCH_REQUEST = 'batch=' + JSON.stringify(PROFILE);
 
 export function validateUser(fb_uid, access_token) {
   return new Promise((resolve, reject) => {
-    let params = qs.stringify({
-      fields: 'id,name,email',
-      access_token: access_token
-    });
-    let url = `${API_URL}/me?${params}`;
-
     request
-      .get(url, res => {
-        const body = [];
-        res.on('data', chunk => body.push(chunk));
-        res.on('end', () => {
-          const json = JSON.parse(body.join(''));
-
-          if (res.statusCode < 200 || res.statusCode > 299) {
-            reject(json);
-          } else if (json.id === fb_uid) {
-            resolve(json);
-          } else {
-            reject({ error: 'Invalid Facebook credentials!' });
-          }
-        });
-      })
-      .on('error', err => {
-        reject(err);
+      .post(API_URL)
+      .send(BATCH_REQUEST)
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (err) {
+          reject(err.response.text);
+        } else {
+          const ret = res.body.map(i => {
+            return JSON.parse(i.body);
+          });
+          resolve({
+            profile: ret[0],
+            accounts: ret[1]
+          });
+        }
       });
   });
 }
