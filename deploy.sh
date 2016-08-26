@@ -20,4 +20,4 @@ docker run  \
   -p 4002:8000 \
   -d \
   node@argon \
-  node server.js
+  npm start
