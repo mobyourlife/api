@@ -2,8 +2,7 @@
 
 import request from 'superagent';
 
-const FB_TOKEN = process.env.FB_TOKEN;
-const API_URL = 'https://graph.facebook.com/v2.7/?access_token=' + FB_TOKEN;
+const API_URL = 'https://graph.facebook.com/v2.7/';
 const PROFILE = [
   {
     "method": "GET",
@@ -19,7 +18,7 @@ const BATCH_REQUEST = 'batch=' + JSON.stringify(PROFILE);
 export function validateUser(fb_uid, access_token) {
   return new Promise((resolve, reject) => {
     request
-      .post(API_URL)
+      .post(`${API_URL}?access_token=${access_token}`)
       .send(BATCH_REQUEST)
       .set('Accept', 'application/json')
       .end((err, res) => {
