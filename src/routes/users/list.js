@@ -6,6 +6,8 @@ import { User } from '../../models';
 export const UsersList = {
   method: 'GET',
   config: {
+    description: 'Lista todos os usuários cadastrados.',
+    tags: ['api'],
     handler: (req, res) => {
       User
         .find()

@@ -3,7 +3,14 @@ import Mongoose from 'mongoose';
 import glob from 'glob';
 import path from 'path';
 
+// Hapi addons
+import Jwt from 'hapi-auth-jwt';
+import Inert from 'inert';
+import Vision from 'vision';
+import HapiSwagger from 'hapi-swagger';
+
 // Settings
+import Pack from '../package';
 import { CONFIG } from './config';
 
 // Routes
@@ -21,8 +28,28 @@ server.connection({
   }
 });
 
+// API documentation options
+const options = {
+  info: {
+    title: 'Documentação da API do Mob Your Life',
+    description: Pack.description,
+    version: Pack.version
+  },
+  tags: [
+    { name: 'users', description: 'Usuários' }
+  ]
+};
+
 // Setup JWT auth
-server.register(require('hapi-auth-jwt'), (err) => {
+server.register([
+  Jwt,
+  Inert,
+  Vision,
+  {
+    register: HapiSwagger,
+    options: options
+  }
+], (err) => {
   if (err) {
     throw err;
   }

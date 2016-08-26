@@ -9,6 +9,8 @@ export const UsersUpdate = {
   method: 'PATCH',
   path: `/{id}`,
   config: {
+    description: 'Altera as informações de um usuário.',
+    tags: ['api'],
     pre: [
       { method: verifyCredentials, assign: 'user' }
     ],

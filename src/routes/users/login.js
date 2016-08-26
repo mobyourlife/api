@@ -8,6 +8,8 @@ import { verifyCredentials, createToken, validateUser } from '../../utils';
 export const UsersLogin = {
   method: 'POST',
   config: {
+    description: 'Tenta efetuar autenticação via Facebook.',
+    tags: ['api'],
     auth: false,
     pre: [
       { method: verifyCredentials, assign: 'user' }
