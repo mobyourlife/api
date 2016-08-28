@@ -14,6 +14,7 @@ const UserModel = new Schema({
   accounts: [{
     account_id: { type: String, required: true },
     name: { type: String, required: true },
+    about: { type: String, required: false },
     category: { type: String, required: false },
     category_list: { type: String, required: false },
     access_token: { type: String, required: true },

@@ -25,7 +25,8 @@ export function ListPages(userId) {
         const pages = user.accounts.map(i => {
           return {
             account_id: i.account_id,
-            name: i.name
+            name: i.name,
+            about: i.about
           };
         });
         resolve(pages);

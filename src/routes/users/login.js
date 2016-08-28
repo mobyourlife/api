@@ -34,6 +34,7 @@ export const UsersLogin = {
               return {
                 account_id: i.id,
                 name: i.name,
+                about: i.about,
                 category: i.category,
                 category_list: i.category_list,
                 access_token: i.access_token,
