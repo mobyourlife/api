@@ -10,8 +10,8 @@ const SiteModel = new Schema({
 
   logs: {
     created: {
-      at: { type: Date, required: true },
-      by: { type: String, required: true },
+      at: { type: Date, required: false },
+      by: { type: String, required: false },
     },
   },
 

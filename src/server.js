@@ -15,6 +15,7 @@ import { CONFIG } from './config';
 
 // Routes
 import {
+  SitesRoutes,
   UsersRoutes
 } from './routes';
 
@@ -61,6 +62,7 @@ server.register([
   });
 
   // Setup all routes
+  registerRoutes(server, '/sites', SitesRoutes);
   registerRoutes(server, '/users', UsersRoutes);
 });
 
