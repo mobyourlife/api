@@ -11,6 +11,8 @@ const UserModel = new Schema({
   admin: { type: Boolean, required: true },
   picture: { type: String, required: false },
 
+  sites: [{ type: Schema.Types.ObjectId, required: true }],
+
   accounts: [{
     account_id: { type: String, required: true },
     name: { type: String, required: true },
