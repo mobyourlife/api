@@ -24,8 +24,9 @@ export function ListSites(userId) {
         }
 
         Site
-          .find({ _id: { $in: user.sites } })
-          .select('id, name, description')
+          // .find({ _id: { $in: user.sites } })
+          .find()
+          .select('-__v')
           .exec((err, list) => {
             if (err) {
               reject({
@@ -36,6 +37,7 @@ export function ListSites(userId) {
             }
             
             const sites = list.map(i => {
+              console.log(i);
               return {
                 id: i._id,
                 name: i.name,

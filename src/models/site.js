@@ -23,7 +23,7 @@ const SiteModel = new Schema({
 
   sources: {
     facebook: [{
-      account_id: { type: String, required: true }
+      account_id: { type: String, required: false }
     }],
   },
 });

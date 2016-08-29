@@ -10,15 +10,12 @@ export const CreateSite = {
     description: 'Cria um novo site.',
     tags: ['api'],
     handler: (req, res) => {
-      console.log('--');
-      console.log(req.payload);
-
       const site = new Site();
       site.name = req.payload.name;
       site.description = req.payload.description;
-      site.sources = {
-        facebook: [req.payload.account_id]
-      };
+      // site.sources = {
+      //   facebook: [req.payload.account_id]
+      // };
 
       site
         .save({
