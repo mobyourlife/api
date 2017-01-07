@@ -1,23 +1,21 @@
 import Hapi from 'hapi'
-import Joi from 'joi'
+
+import { HelloName } from './routes/hello'
 
 const server = new Hapi.Server()
-server.connection({port: 4000})
-
-server.route({
-  method: 'GET',
-  path: '/hello/{name*}',
-  config: {
-    validate: {
-      params: {
-        name: Joi.string().min(2).max(40).alphanum().required()
-      }
-    }
-  },
-  handler: (req, reply) => {
-    reply(`Hello ${req.params.name}!`)
+server.connection({
+  host: '0.0.0.0',
+  port: 4000,
+  routes: {
+    cors: true
   }
 })
+
+const routes = [
+  HelloName,
+]
+
+routes.forEach(routeConfig => server.route(routeConfig))
 
 server.start(() => {
   console.log('Hapi running...')
