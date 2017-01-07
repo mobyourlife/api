@@ -2,6 +2,7 @@ import Hapi from 'hapi'
 import Mongoose from 'mongoose'
 
 import { HelloName } from './routes/hello'
+import { SitesList } from './routes/sites'
 
 const MOB_MONGO_FACEBOOK_DATABASE = process.env.MOB_MONGO_FACEBOOK_DATABASE || 'mongodb://localhost:27017/mobyourlife_facebook'
 
@@ -16,6 +17,7 @@ server.connection({
 
 const routes = [
   HelloName,
+  SitesList,
 ]
 
 routes.forEach(routeConfig => server.route(routeConfig))
