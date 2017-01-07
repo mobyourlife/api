@@ -4,7 +4,7 @@ import Mongoose from 'mongoose'
 import { HelloName } from './routes/hello'
 import { SitesList } from './routes/sites'
 
-const MOB_MONGO_FACEBOOK_DATABASE = process.env.MOB_MONGO_FACEBOOK_DATABASE || 'mongodb://localhost:27017/mobyourlife_facebook'
+const MOB_MONGO_FACEBOOK_DATABASE = process.env.MOB_MONGO_FACEBOOK_DATABASE || 'mongodb://localhost:27017/mobyourlife'
 
 const server = new Hapi.Server()
 server.connection({
