@@ -1,0 +1,12 @@
+{
+  "name": "mob-api",
+  "version": "4.0.0",
+  "description": "API do Mob Your Life.",
+  "main": "api.js",
+  "repository": {
+    "url": "git@bitbucket.org:mobyourlife/api.git",
+    "type": "git"
+  },
+  "author": "Filipe Oliveira <contato@fmoliveira.com.br>",
+  "license": "Apache-2.0"
+}
