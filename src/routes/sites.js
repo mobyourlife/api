@@ -10,7 +10,10 @@ export const SitesList = {
     const filter = {active: true}
     const mapping = {name: true}
 
-    Page.find(filter, mapping).then(docs => {
+    Page
+    .find(filter, mapping)
+    .sort({name: 1})
+    .then(docs => {
       reply({sites: docs})
     }, err => {
       throw Boom.badRequest(err)
