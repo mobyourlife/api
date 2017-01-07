@@ -3,10 +3,22 @@
   "version": "4.0.0",
   "description": "API do Mob Your Life.",
   "main": "api.js",
+  "scripts": {
+    "start": "node api.js",
+    "test": "standard"
+  },
   "repository": {
     "url": "git@bitbucket.org:mobyourlife/api.git",
     "type": "git"
   },
   "author": "Filipe Oliveira <contato@fmoliveira.com.br>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-preset-es2015": "^6.18.0",
+    "standard": "^8.6.0"
+  },
+  "dependencies": {
+    "hapi": "^16.1.0"
+  }
 }
