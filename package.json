@@ -21,7 +21,10 @@
   "dependencies": {
     "boom": "^4.2.0",
     "hapi": "^16.1.0",
+    "hapi-auth-jwt": "^4.0.0",
     "joi": "^10.1.0",
-    "mongoose": "^4.7.6"
+    "joi-objectid": "^2.0.0",
+    "mongoose": "^4.7.6",
+    "superagent": "^3.3.1"
   }
 }
