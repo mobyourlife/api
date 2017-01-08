@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-import { Page, User } from '../../../models';
+import { Page, User } from '../../../models'
 
-export function ListSites(userId) {
+export function ListSites (userId) {
   return new Promise((resolve, reject) => {
     User
       .findOne({ _id: userId })
@@ -12,15 +12,15 @@ export function ListSites(userId) {
           reject({
             status: 400,
             message: 'Unable to query user sites!'
-          });
-          return;
+          })
+          return
         }
         if (!user) {
           reject({
             status: 404,
             message: 'User sites not found!'
-          });
-          return;
+          })
+          return
         }
 
         const userSites = user.accounts
@@ -34,20 +34,20 @@ export function ListSites(userId) {
               reject({
                 status: 400,
                 message: 'Unable to query sites list!'
-              });
-              return;
+              })
+              return
             }
-            
+
             const sites = list.map(i => {
-              console.log(i);
+              console.log(i)
               return {
                 id: i._id,
                 name: i.name,
                 description: i.about
-              };
-            });
-            resolve(sites);
-          });
-      });
-  });
+              }
+            })
+            resolve(sites)
+          })
+      })
+  })
 }

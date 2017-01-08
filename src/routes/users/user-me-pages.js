@@ -1,8 +1,6 @@
-'use strict';
+'use strict'
 
-import Boom from 'boom';
-import { User } from '../../models';
-import { ListPages } from './shared/list-pages';
+import { ListPages } from './shared/list-pages'
 
 export const UserMePagesList = {
   method: 'GET',
@@ -13,11 +11,11 @@ export const UserMePagesList = {
     handler: (req, res) => {
       ListPages(req.auth.credentials.id)
         .then(pages => {
-          res(pages).code(200);
+          res(pages).code(200)
         })
         .catch(err => {
-          res(err).code(err.status);
-        });
+          res(err).code(err.status)
+        })
     },
     auth: {
       strategy: 'jwt'

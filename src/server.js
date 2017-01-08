@@ -52,18 +52,18 @@ server.start(() => {
 })
 
 // Register routes into the server
-function registerRoutes(server, basePath, routes) {
+function registerRoutes (server, basePath, routes) {
   if (!routes || !Array.isArray(routes)) {
-    return;
+    return
   }
 
   routes
     .map(i => {
-      i.path = basePath + (i.path || '');
-      return i;
+      i.path = basePath + (i.path || '')
+      return i
     })
     .forEach(i => {
-      console.log(`Registering route ${i.method} ${i.path}...`);
-      server.route(i);
-    });
+      console.log(`Registering route ${i.method} ${i.path}...`)
+      server.route(i)
+    })
 }

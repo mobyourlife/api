@@ -12,12 +12,12 @@ const PageModel = new Mongoose.Schema({
     offset_x: {type: Number, required: true},
     offset_y: {type: Number, required: true},
     source: {type: String, required: true},
-    id: {type: String, required: true},
+    id: {type: String, required: true}
   },
   emails: [{type: String, required: true}],
   engagement: {
     count: {type: Number, required: true},
-    social_sentence: {type: String},
+    social_sentence: {type: String}
   },
   fan_count: {type: Number, required: true},
   is_published: {type: Boolean},
@@ -31,7 +31,7 @@ const PageModel = new Mongoose.Schema({
     longitude: {type: Number},
     state: {type: String},
     street: {type: String},
-    zip: {type: String},
+    zip: {type: String}
   },
   overall_star_rating: {type: Number},
   phone: {type: String},
@@ -45,7 +45,7 @@ const PageModel = new Mongoose.Schema({
     is_callable: {type: Boolean},
     is_callable_webrtc: {type: Boolean},
     reason_code: {type: Number},
-    reason_description: {type: String},
+    reason_description: {type: String}
   },
   were_here_count: {type: Number},
   log: {
@@ -55,14 +55,14 @@ const PageModel = new Mongoose.Schema({
     check_albums: {type: Date},
     build_queued: {type: Date},
     check_feed: {type: Date},
-    last_built: {type: Date},
+    last_built: {type: Date}
   },
   custom: {
-    theme_name: {type: String},
+    theme_name: {type: String}
   },
   admin: {
-    analytics_id: {type: String},
-  },
+    analytics_id: {type: String}
+  }
 })
 
 export const Page = Mongoose.model('Page', PageModel)

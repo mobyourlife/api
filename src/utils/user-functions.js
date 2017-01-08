@@ -1,11 +1,17 @@
-'use strict';
+'use strict'
 
-import { User } from '../models';
+import Boom from 'boom'
 
-export function verifyCredentials(req, res) {
+import { User } from '../models'
+
+export function verifyCredentials (req, res) {
   User.findOne({
     fb_uid: req.payload.fb_uid
   }, (err, user) => {
-    res(user);
-  });
+    if (err) {
+      throw Boom.badRequest(err)
+    } else {
+      res(user)
+    }
+  })
 }

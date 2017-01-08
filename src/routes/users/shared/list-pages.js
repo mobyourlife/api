@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-import { User } from '../../../models';
+import { User } from '../../../models'
 
-export function ListPages(userId) {
+export function ListPages (userId) {
   return new Promise((resolve, reject) => {
     User
       .findOne({ _id: userId })
@@ -12,24 +12,24 @@ export function ListPages(userId) {
           reject({
             status: 400,
             message: 'Unable to query user pages!'
-          });
-          return;
+          })
+          return
         }
         if (!user) {
           reject({
             status: 404,
             message: 'User not found!'
-          });
-          return;
+          })
+          return
         }
         const pages = user.accounts.map(i => {
           return {
             account_id: i.account_id,
             name: i.name,
             about: i.about
-          };
-        });
-        resolve(pages);
-      });
-  });
+          }
+        })
+        resolve(pages)
+      })
+  })
 }

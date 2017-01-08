@@ -1,4 +1,4 @@
-import { CreateSite } from './create-site';
+import { CreateSite } from './create-site'
 
 export const SitesRoutes = [
   CreateSite

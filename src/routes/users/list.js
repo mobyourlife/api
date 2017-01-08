@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-import Boom from 'boom';
-import { User } from '../../models';
+import Boom from 'boom'
+import { User } from '../../models'
 
 export const UsersList = {
   method: 'GET',
@@ -14,17 +14,17 @@ export const UsersList = {
         .select('-password -__v')
         .exec((err, users) => {
           if (err) {
-            throw Boom.badRequest(err);
+            throw Boom.badRequest(err)
           }
           if (!users.length) {
-            throw Boom.notFound('No users found!');
+            throw Boom.notFound('No users found!')
           }
-          res(users);
-        });
+          res(users)
+        })
     },
     auth: {
       strategy: 'jwt',
       scope: ['admin']
     }
   }
-};
+}

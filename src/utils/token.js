@@ -1,12 +1,12 @@
-'use strict';
+'use strict'
 
-import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken'
 
-export function createToken(user) {
-  let scopes;
+export function createToken (user) {
+  let scopes
 
   if (user.admin) {
-    scopes = 'admin';
+    scopes = 'admin'
   }
 
   return jwt.sign({
@@ -16,5 +16,5 @@ export function createToken(user) {
   }, process.env.JWT_SECRET, {
     algorithm: 'HS256',
     expiresIn: '1h'
-  });
+  })
 }

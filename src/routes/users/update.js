@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-import Boom from 'boom';
-import { User } from '../../models';
-import { UserUpdateDto } from '../../dtos';
-import { verifyCredentials } from '../../utils';
+import Boom from 'boom'
+import { User } from '../../models'
+import { UserUpdateDto } from '../../dtos'
+import { verifyCredentials } from '../../utils'
 
 export const UsersUpdate = {
   method: 'PATCH',
@@ -15,17 +15,17 @@ export const UsersUpdate = {
       { method: verifyCredentials, assign: 'user' }
     ],
     handler: (req, res) => {
-      const id = req.params.id;
+      const id = req.params.id
       User
         .findOneAndUpdate({ _id: id }, req.pre.user, (err, user) => {
           if (err) {
-            throw Boom.badRequest(err);
+            throw Boom.badRequest(err)
           }
           if (!user) {
-            throw Boom.notFound('User not found!');
+            throw Boom.notFound('User not found!')
           }
-          res({ message: 'User updated!' });
-        });
+          res({ message: 'User updated!' })
+        })
     },
     validate: {
       payload: UserUpdateDto.Payload(),
@@ -36,4 +36,4 @@ export const UsersUpdate = {
       scope: ['admin']
     }
   }
-};
+}
