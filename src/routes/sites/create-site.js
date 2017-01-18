@@ -1,40 +1,50 @@
 'use strict'
 
 import Boom from 'boom'
-import { Site } from '../../models'
+import { Page } from '../../models'
 import { CreateSiteDto } from '../../dtos'
+import { verifyCredentials } from '../../utils'
 
 export const CreateSite = {
   method: 'POST',
   config: {
     description: 'Cria um novo site.',
     tags: ['api'],
+    pre: [
+      { method: verifyCredentials, assign: 'user' }
+    ],
     handler: (req, res) => {
-      const site = new Site()
-      site.name = req.payload.name
-      site.description = req.payload.description
-      // site.sources = {
-      //   facebook: [req.payload.account_id]
-      // };
+      const account = req.pre.user.accounts.find(i => i.account_id === req.payload.account_id)
+      Page.findOne({fb_account_id: req.payload.account_id}).then(page => {
+        if (page) {
+          page.name = account.name
+          page.category = account.category
+          page.picture = account.picture
+          page.active = true
+          page.save((err, page) => {
+            res(page._id).code(200)
+          })
+          return
+        }
 
-      site
-        .save({
-          name: req.payload.name,
-          description: req.payload.description,
-          sources: {
-            facebook: [
-              req.payload.id
-            ]
-          }
-        }, (err, created) => {
+        page = new Page()
+        page.fb_account_id = req.payload.account_id
+        page.name = account.name
+        page.category = account.category
+        page.picture = account.picture
+        page.active = true
+
+        Page.insertMany([page], (err, list) => {
           if (err) {
             throw Boom.badRequest(err)
           }
-          if (!created) {
-            throw Boom.badRequest('Site not created!')
+          if (!list || !list.length) {
+            throw Boom.badRequest('Site creation failed!')
           }
-          res(created).code(201)
+          const created = list[0]
+          res(created._id).code(201)
         })
+      })
     },
     validate: {
       payload: CreateSiteDto.Payload()

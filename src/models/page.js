@@ -7,23 +7,27 @@ const PageModel = new Mongoose.Schema({
   about: {type: String},
   category: {type: String, required: true},
   category_list: [{type: String}],
+  picture: {type: String, required: false},
   cover: {
-    cover_id: {type: String, required: true},
-    offset_x: {type: Number, required: true},
-    offset_y: {type: Number, required: true},
-    source: {type: String, required: true},
-    id: {type: String, required: true}
+    type: {
+      cover_id: {type: String, required: true},
+      offset_x: {type: Number, required: true},
+      offset_y: {type: Number, required: true},
+      source: {type: String, required: true},
+      id: {type: String, required: true},
+    },
+    required: false
   },
   emails: [{type: String, required: true}],
   engagement: {
-    count: {type: Number, required: true},
+    count: {type: Number, required: false},
     social_sentence: {type: String}
   },
-  fan_count: {type: Number, required: true},
+  fan_count: {type: Number, required: false},
   is_published: {type: Boolean},
   is_verified: {type: Boolean},
   is_webhooks_subscribed: {type: Boolean},
-  link: {type: String, required: true},
+  link: {type: String, required: false},
   location: {
     city: {type: String},
     country: {type: String},

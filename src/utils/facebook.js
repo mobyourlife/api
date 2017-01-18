@@ -10,7 +10,7 @@ const PROFILE = [
   },
   {
     'method': 'GET',
-    'relative_url': 'me/accounts?fields=id,name,about,category,category_list,access_token,perms'
+    'relative_url': 'me/accounts?fields=id,name,about,category,category_list,access_token,perms,picture,cover'
   }
 ]
 const BATCH_REQUEST = 'batch=' + JSON.stringify(PROFILE)

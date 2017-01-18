@@ -39,11 +39,11 @@ export function ListSites (userId) {
             }
 
             const sites = list.map(i => {
-              console.log(i)
               return {
                 id: i._id,
                 name: i.name,
-                description: i.about
+                description: i.about,
+                picture: i.picture
               }
             })
             resolve(sites)
