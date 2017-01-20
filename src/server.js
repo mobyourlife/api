@@ -3,6 +3,7 @@ import Mongoose from 'mongoose'
 import Jwt from 'hapi-auth-jwt'
 
 import {
+  AdminRoutes,
   SitesRoutes,
   UsersRoutes
 } from './routes'
@@ -34,6 +35,7 @@ server.register([
   })
 
   // Setup routes
+  registerRoutes(server, '/admin', AdminRoutes)
   registerRoutes(server, '/sites', SitesRoutes)
   registerRoutes(server, '/users', UsersRoutes)
 })

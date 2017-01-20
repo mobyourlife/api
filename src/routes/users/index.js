@@ -4,6 +4,7 @@ import { UsersUpdate } from './update'
 import { UserMePagesList } from './user-me-pages'
 import { UserPagesList } from './user-pages'
 import { UserMeSitesList } from './user-me-sites'
+import { UserMe } from './user-me'
 
 export const UsersRoutes = [
   UsersList,
@@ -11,5 +12,6 @@ export const UsersRoutes = [
   UsersUpdate,
   UserMePagesList,
   UserPagesList,
-  UserMeSitesList
+  UserMeSitesList,
+  UserMe
 ]
