@@ -28,6 +28,7 @@ function ListSites () {
   return new Promise((resolve, reject) => {
       Page
         .find({active: true})
+        .sort({name: 1})
         .select('-__v')
         .exec((err, list) => {
           if (err) {

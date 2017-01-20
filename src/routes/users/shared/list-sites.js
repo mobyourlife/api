@@ -28,6 +28,7 @@ export function ListSites (userId) {
 
         Page
           .find({ fb_account_id: { $in: userSites }, active: true })
+          .sort({name: 1})
           .select('-__v')
           .exec((err, list) => {
             if (err) {
