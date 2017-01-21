@@ -62,9 +62,11 @@ const PageModel = new Mongoose.Schema({
     last_built: {type: Date}
   },
   custom: {
+    title: {type: String},
     theme_name: {type: String}
   },
   admin: {
+    domain: {type: String},
     analytics_id: {type: String}
   }
 })
