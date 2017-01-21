@@ -4,6 +4,8 @@ import Boom from 'boom'
 import { Page } from '../../models'
 import { SiteUpdateDto } from '../../dtos'
 
+const RESERVED = /\.?mobyourlife\.com\.br$/i
+
 export const SiteUpdate = {
   method: 'PATCH',
   path: `/sites/{id}`,
@@ -14,6 +16,11 @@ export const SiteUpdate = {
       const id = req.params.id
       const {title, domain, analytics_id} = req.payload
 
+      if (RESERVED.exec(domain)) {
+        res({statusCode: 400, message: 'Domínio não permitido! Por favor use o subdomínio ".meumob.site" ou seu domínio próprio.'})
+        return
+      }
+
       if (req.payload.domain) {
         checkDuplicateDomain(id, domain)
         .then(dup => {
@@ -21,11 +28,13 @@ export const SiteUpdate = {
             res({statusCode: 400, message: 'Este domínio já está em uso por outro site! Por favor utilize um domínio diferente.'}).code(400)
           } else {
             updateSiteInfo(id, title, domain, analytics_id)
+            .then(() => Page.findOne({_id: id}))
             .then(site => res(site).code(200))
           }
         })
       } else {
         updateSiteInfo(id, title, domain, analytics_id)
+        .then(() => Page.findOne({_id: id}))
         .then(site => res(site).code(200))
       }
     },
