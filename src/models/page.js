@@ -55,7 +55,7 @@ const PageModel = new Mongoose.Schema({
   log: {
     check_page: {type: Date},
     last_modified: {type: Date},
-    build_updated: {type: Date},
+    build_updated: {type: Boolean},
     check_albums: {type: Date},
     build_queued: {type: Date},
     check_feed: {type: Date},

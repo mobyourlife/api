@@ -48,7 +48,8 @@ function updateSiteInfo (id, title, domain, analytics_id) {
     'custom.title': title,
     'admin.domain': domain,
     'admin.analytics_id': analytics_id,
-    'log.domain_changed': new Date,
-    'log.last_built': null
+    'log.domain_changed': new Date(),
+    'log.build_updated': false,
+    'log.build_queued': new Date()
   }})
 }
