@@ -47,6 +47,8 @@ function updateSiteInfo (id, title, domain, analytics_id) {
   return Page.findOneAndUpdate({_id: id}, {$set: {
     'custom.title': title,
     'admin.domain': domain,
-    'admin.analytics_id': analytics_id
+    'admin.analytics_id': analytics_id,
+    'log.domain_changed': new Date,
+    'log.last_built': null
   }})
 }

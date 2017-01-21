@@ -59,7 +59,8 @@ const PageModel = new Mongoose.Schema({
     check_albums: {type: Date},
     build_queued: {type: Date},
     check_feed: {type: Date},
-    last_built: {type: Date}
+    last_built: {type: Date},
+    domain_changed: {type: Date}
   },
   custom: {
     title: {type: String},
