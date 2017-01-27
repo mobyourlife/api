@@ -44,7 +44,8 @@ function ListSites () {
               id: i._id,
               name: i.name,
               description: i.about,
-              picture: i.picture
+              picture: i.picture,
+              log: i.log
             }
           })
           resolve(sites)
